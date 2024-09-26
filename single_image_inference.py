@@ -1,9 +1,39 @@
 import torch
 from PIL import Image
+from typing import List
+from PIL.Image import Image as PILImage
+import torchvision.transforms.functional as TF
 from torchvision import transforms
 from argparse import ArgumentParser
 
-from utils.utils_data import center_corners_crop
+#from utils.utils_data import center_corners_crop
+
+
+def center_corners_crop(img: PILImage, crop_size: int = 224) -> List[PILImage]:
+    """
+    Return the center crop and the four corners of the image.
+
+    Args:
+        img (PIL.Image): image to crop
+        crop_size (int): size of each crop
+
+    Returns:
+        crops (List[PIL.Image]): list of the five crops
+    """
+    width, height = img.size
+
+    # Calculate the coordinates for the center crop and the four corners
+    cx = width // 2
+    cy = height // 2
+    crops = [
+        TF.crop(img, cy - crop_size // 2, cx - crop_size // 2, crop_size, crop_size),  # Center
+        TF.crop(img, 0, 0, crop_size, crop_size),  # Top-left corner
+        TF.crop(img, height - crop_size, 0, crop_size, crop_size),  # Bottom-left corner
+        TF.crop(img, 0, width - crop_size, crop_size, crop_size),  # Top-right corner
+        TF.crop(img, height - crop_size, width - crop_size, crop_size, crop_size)  # Bottom-right corner
+    ]
+
+    return crops
 
 
 if __name__ == '__main__':
