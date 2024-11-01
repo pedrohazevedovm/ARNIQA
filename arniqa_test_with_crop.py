@@ -94,7 +94,7 @@ def main(directory: str) -> None:
     df = pd.DataFrame(iqa_score_dict)
 
     # Save the DataFrame in a csv file
-    df.to_csv(f"image_quality_scores_{directory}_with_crop.csv", index=False)
+    df.to_csv(f"image_quality_scores_{directory}_with_crop_complete.csv", index=False)
     print(f"Resultados salvos em 'image_quality_scores_{directory}_with_crop.csv'.")
 
 

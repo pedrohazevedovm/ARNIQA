@@ -13,7 +13,7 @@ import kornia
 from utils.utils import PROJECT_ROOT
 from utils.utils_distortions import fspecial, filter2D, curves, imscatter, mapmm
 
-dither_cpp = ctypes.CDLL(str(PROJECT_ROOT / "utils" / "dither_extension/dither.so")).dither
+dither_cpp = ctypes.CDLL(str(PROJECT_ROOT / "utils" / "dither_extension/dither.dll")).dither
 dither_cpp.argtypes = [ctypes.POINTER(ctypes.c_float), ctypes.POINTER(ctypes.c_float), ctypes.c_int, ctypes.c_int,
                        ctypes.c_int]
 
