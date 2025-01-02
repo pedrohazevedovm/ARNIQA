@@ -3,7 +3,7 @@ import torchvision.transforms as transforms
 from PIL import Image
 import os
 import pandas as pd
-
+from hubconf import ARNIQA
 
 def main(directory: str) -> None:
     iqa_score_dict = {"image_name": [], "regressor_dataset": [], "score": []}
@@ -18,12 +18,13 @@ def main(directory: str) -> None:
 
     # Set the device
     device = torch.device("cuda") if torch.cuda.is_available() else "cpu"
-    regressors_datasets_list = ["live", "csiq", "tid2013", "kadid10k", "flive", "spaq", "clive", "koniq10k"]
+    regressors_datasets_list = ["koniq10k"]
 
     for regressor_dataset in regressors_datasets_list:
         # Load the model
-        model = torch.hub.load(repo_or_dir="miccunifi/ARNIQA", source="github", model="ARNIQA",
-                               regressor_dataset=regressor_dataset)
+        # model = torch.hub.load(repo_or_dir="miccunifi/ARNIQA", source="github", model="ARNIQA",
+        #                        regressor_dataset=regressor_dataset)
+        model = ARNIQA(regressor_dataset).to(device)
         model.eval().to(device)
 
         # Define the preprocessing pipeline
@@ -58,9 +59,9 @@ def main(directory: str) -> None:
     df = pd.DataFrame(iqa_score_dict)
 
     # Save the DataFrame in a csv file
-    df.to_csv(f"image_quality_scores_{directory}.csv", index=False)
-    print(f"Resultados salvos em 'image_quality_scores_{directory}.csv'.")
+    df.to_csv(f"image_quality_scores_paper_semcrop_hriq.csv", index=False)
+    print(f"Resultados salvos em 'image_quality_scores_PRETRAINED_KONIQ_sem_crop.csv'.")
 
 
 if __name__ == "__main__":
-    main('HRIQ')
+    main('HRIQ_HQ')

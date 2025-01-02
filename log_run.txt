@@ -1,0 +1,68 @@
+ python main.py --config config.yaml
+DotMap(experiment_name='ARNIQA_PHAVM_PC_GAMER', device=0, seed=27, data_base_path='datasets/', training=DotMap(epochs=1, lr=0.001, batch_size=4, num_workers=4, log_images_frequency=1000, resume_training=False, data=DotMap(patch_size=224, max_distortions=4, num_levels=5, pristine_prob=0.05), optimizer=DotMap(name='SGD', momentum=0.9, weight_decay=0.0001), lr_scheduler=DotMap(name='CosineAnnealingWarmRestarts', T_0=1, T_mult=2, eta_min=1e-06)), validation=DotMap(frequency=1, num_splits=10, alpha=0.1, visualize=True, visualization=DotMap(tsne=DotMap(n_components=3, perplexity=30, n_iter=1000), umap=DotMap(n_components=3, n_neighbors=25, min_dist=0.2, metric='euclidean')), datasets=['spaq']), test=DotMap(batch_size=16, num_workers=16, num_splits=10, grid_search=True, alpha=0.1, crop_size=224, datasets=['spaq']), model=DotMap(temperature=0.1, encoder=DotMap(embedding_dim=128, pretrained=True, use_norm=True)), logging=DotMap(use_wandb=True, wandb=DotMap(online=True, project='ARNIQA_TEST', entity='phavm-ufpe')))
+wandb: Currently logged in as: phavm (phavm-ufpe). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.18.6 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.0
+wandb: Run data is saved locally in /home/softex/Documents/phavm/ARNIQA/wandb/run-20241113_161241-f6z5cwtb
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run ARNIQA_PHAVM_PC_GAMER
+wandb: ⭐️ View project at https://wandb.ai/phavm-ufpe/ARNIQA_TEST
+wandb: 🚀 View run at https://wandb.ai/phavm-ufpe/ARNIQA_TEST/runs/f6z5cwtb
+Saving checkpoints in folder:  /home/softex/Documents/phavm/ARNIQA/experiments/ARNIQA_PHAVM_PC_GAMER/pretrain
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 35000/35000 [54:14<00:00, 10.76it/s]
+Starting validation...████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 35000/35000 [54:13<00:00,  8.04it/s]
+13/11/2024 17:06:58 - Starting val phase
+13/11/2024 17:14:49 - SPAQ: SRCC: 0.898 - PLCC: 0.903
+/home/softex/.local/lib/python3.10/site-packages/numpy/core/fromnumeric.py:3504: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+/home/softex/.local/lib/python3.10/site-packages/numpy/core/_methods.py:129: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+Traceback (most recent call last):
+  File "/home/softex/Documents/phavm/ARNIQA/main.py", line 129, in <module>
+    main()
+  File "/home/softex/Documents/phavm/ARNIQA/main.py", line 114, in main
+    train(args, model, train_dataloader, optimizer, lr_scheduler, scaler, logger, device)
+  File "/home/softex/Documents/phavm/ARNIQA/train.py", line 150, in train
+    kadid10k_val = KADID10KDataset(args.data_base_path / "KADID10K", phase="val")
+  File "/home/softex/Documents/phavm/ARNIQA/data/dataset_kadid10k.py", line 35, in __init__
+    scores_csv = pd.read_csv(self.root / "dmos.csv")
+  File "/home/softex/miniconda3/envs/ARNIQA/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 948, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/softex/miniconda3/envs/ARNIQA/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 611, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/softex/miniconda3/envs/ARNIQA/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1448, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "/home/softex/miniconda3/envs/ARNIQA/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1705, in _make_engine
+    self.handles = get_handle(
+  File "/home/softex/miniconda3/envs/ARNIQA/lib/python3.10/site-packages/pandas/io/common.py", line 863, in get_handle
+    handle = open(
+FileNotFoundError: [Errno 2] No such file or directory: 'datasets/KADID10K/dmos.csv'
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb:
+wandb: Run history:
+wandb:                    loss ▄▅▃▂▁▃▂▄▁▁▃▁▁▁▂▁▂▁▁▂▁▁█▁▂▂▂▄▁▁▁▄▅▁▁▁▁▂▄▁
+wandb:                      lr ███████▇▇▇▇▇▆▆▆▆▅▅▅▅▄▄▄▄▃▃▃▃▂▂▂▂▂▁▁▁▁▁▁▁
+wandb:  val_plcc_authentic_avg ▁
+wandb:            val_plcc_avg ▁
+wandb:           val_plcc_spaq ▁
+wandb: val_srocc_authentic_avg ▁
+wandb:           val_srocc_avg ▁
+wandb:          val_srocc_spaq ▁
+wandb:
+wandb: Run summary:
+wandb:                    loss 0.00618
+wandb:                      lr 0.0
+wandb:  val_plcc_authentic_avg 0.90308
+wandb:            val_plcc_avg 0.90308
+wandb:           val_plcc_spaq 0.90308
+wandb:  val_plcc_synthetic_avg nan
+wandb: val_srocc_authentic_avg 0.89801
+wandb:           val_srocc_avg 0.89801
+wandb:          val_srocc_spaq 0.89801
+wandb: val_srocc_synthetic_avg nan
+wandb:
+wandb: 🚀 View run ARNIQA_PHAVM_PC_GAMER at: https://wandb.ai/phavm-ufpe/ARNIQA_TEST/runs/f6z5cwtb
+wandb: Synced 6 W&B file(s), 560 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20241113_161241-f6z5cwtb/logs
+softex@d002:~/Documents/phavm/ARNIQA$

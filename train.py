@@ -173,6 +173,7 @@ def train(args: DotMap,
             best_model_filename = f"best_epoch_{epoch}_srocc_{best_srocc:.3f}_plcc_{best_plcc:.3f}.pth"
             torch.save(model.state_dict(), checkpoint_path / best_model_filename)
 
+
         # Save last checkpoint
         if last_model_filename:
             os.remove(checkpoint_path / last_model_filename)  # Remove previous last model

@@ -17,13 +17,13 @@ from sklearn.linear_model import Ridge
 from scipy import stats
 import argparse
 
-from data import LIVEDataset, CSIQDataset, TID2013Dataset, KADID10KDataset, FLIVEDataset, SPAQDataset
+from data import LIVEDataset, CSIQDataset, TID2013Dataset, KADID10KDataset, FLIVEDataset, SPAQDataset, Koniq10kDataset
 from utils.utils import PROJECT_ROOT, parse_command_line_args, merge_configs, parse_config
 from models.simclr import SimCLR
 
 
 synthetic_datasets = ["live", "csiq", "tid2013", "kadid10k"]
-authentic_datasets = ["flive", "spaq"]
+authentic_datasets = ["flive", "spaq", "koniq10k"]
 
 
 def test(args: DotMap,
@@ -232,6 +232,10 @@ def get_results(model: nn.Module,
             dataset = SPAQDataset(data_base_path / "SPAQ", phase="all", crop_size=crop_size)
             dataset_num_splits = num_splits
             dataset_name = "SPAQ"
+        elif d == "koniq10k":
+            dataset = Koniq10kDataset(data_base_path / "KonIQ-10k", phase="all", crop_size=crop_size)
+            dataset_num_splits = num_splits
+            dataset_name = "KONIQ10K"
         else:
             raise ValueError(f"Dataset {d} not supported")
 

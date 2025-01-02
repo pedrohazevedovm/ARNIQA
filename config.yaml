@@ -1,5 +1,5 @@
 # General settings
-experiment_name: "ARNIQA_PHAVM"   # name of the experiment
+experiment_name: "ARNIQA_PHAVM_PC_GAMER_20241128_screen"   # name of the experiment
 device: 0   # -1 for CPU, otherwise GPU id
 seed: 27  # random seed
 data_base_path: "datasets/"    # path to the base directory containing the datasets
@@ -55,6 +55,7 @@ validation:
 #    - kadid10k
 #    - flive
     - spaq
+    - koniq10k
 
 
 # Test
@@ -66,12 +67,13 @@ test:
   alpha: 0.1  # alpha value for the regression when grid search is not used
   crop_size: 224  # crop size for inference
   datasets:  # datasets to use for test
-    - live
-    - csiq
-    - tid2013
-    - kadid10k
-    - flive
+#    - live
+#    - csiq
+#    - tid2013
+#    - kadid10k
+#    - flive
     - spaq
+    - koniq10k
 
 
 # Model
@@ -85,8 +87,8 @@ model:
 
 # Logging
 logging:
-  use_wandb: true   # if True, use wandb for logging
+  use_wandb: false   # if True, use wandb for logging
   wandb:
-    online: true    # if True, log online to wandb
+    online: false    # if True, log online to wandb
     project: "ARNIQA_TEST"   # wandb project name
     entity: "phavm-ufpe"    # wandb entity name (team name, not user)

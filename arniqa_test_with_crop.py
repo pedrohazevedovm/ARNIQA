@@ -6,6 +6,7 @@ from PIL.Image import Image as PILImage
 from typing import List
 import os
 import pandas as pd
+from hubconf import ARNIQA
 
 
 def center_corners_crop(img: PILImage, crop_size: int = 224) -> List[PILImage]:
@@ -47,12 +48,13 @@ def main(directory: str) -> None:
 
     # Set the device
     device = torch.device("cuda") if torch.cuda.is_available() else "cpu"
-    regressors_datasets_list = ["live", "csiq", "tid2013", "kadid10k", "flive", "spaq", "clive", "koniq10k"]
+    regressors_datasets_list = ["koniq10k"]
 
     for regressor_dataset in regressors_datasets_list:
         # Load the model
-        model = torch.hub.load(repo_or_dir="miccunifi/ARNIQA", source="github", model="ARNIQA",
-                               regressor_dataset=regressor_dataset)
+        # model = torch.hub.load(repo_or_dir="miccunifi/ARNIQA", source="github", model="ARNIQA",
+        #                        regressor_dataset=regressor_dataset)
+        model = ARNIQA(regressor_dataset).to(device)
         model.eval().to(device)
 
         # Define the normalization transform
@@ -94,9 +96,9 @@ def main(directory: str) -> None:
     df = pd.DataFrame(iqa_score_dict)
 
     # Save the DataFrame in a csv file
-    df.to_csv(f"image_quality_scores_{directory}_with_crop_complete.csv", index=False)
-    print(f"Resultados salvos em 'image_quality_scores_{directory}_with_crop.csv'.")
+    df.to_csv(f"image_quality_scores_{directory}_with_crop_complete_KONIQ_PRETRAINED.csv", index=False)
+    print(f"Resultados salvos em 'image_quality_scores_{directory}_with_crop_KONIQ.csv'.")
 
 
 if __name__ == "__main__":
-    main('HRIQ')
+    main('HRIQ_HQ')

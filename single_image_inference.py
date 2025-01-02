@@ -5,6 +5,7 @@ from PIL.Image import Image as PILImage
 import torchvision.transforms.functional as TF
 from torchvision import transforms
 from argparse import ArgumentParser
+from hubconf import ARNIQA
 
 from utils.utils_data import center_corners_crop
 
@@ -19,8 +20,7 @@ if __name__ == '__main__':
     device = torch.device("cuda") if torch.cuda.is_available() else "cpu"
 
     # Load the model
-    model = torch.hub.load(repo_or_dir="miccunifi/ARNIQA", source="github", model="ARNIQA",
-                           regressor_dataset=args.regressor_dataset)
+    model = ARNIQA("koniq10k")
     model.eval().to(device)
 
     # Define the normalization transform
