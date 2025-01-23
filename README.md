@@ -1,3 +1,8 @@
+# Image Quality Assessment Using Deep Learning for Robotic Camera Shooting Evaluation
+
+ARNIQA forked repository: Repository forked from the original ARNIQA repository containing modifications for training 
+ARNIQA model using KonIQ-10k dataset as the training dataset for Pedro Mendonça's monograph from RRIA.
+
 # ARNIQA (WACV 2024 Oral)
 
 ### Learning Distortion Manifold for Image Quality Assessment
@@ -125,6 +130,7 @@ and the annotations from [here](https://github.com/icbcbicc/IQA-Dataset/blob/mas
 4. [**KADID10K**](http://database.mmsp-kn.de/kadid-10k-database.html)
 5. [**FLIVE**](https://baidut.github.io/PaQ-2-PiQ/#download-zone)
 6. [**SPAQ**](https://github.com/h4nwei/SPAQ)
+7. [**KonIQ-10k**](https://database.mmsp-kn.de/koniq-10k-database.html)
 
 
 For each dataset, move the ```splits``` folder placed under the ```datasets``` directory of our repo under the
@@ -175,6 +181,11 @@ At the end, the directory structure should look like this:
 |    |    ├── Annotations
 |    |    ├── splits
 |    |    ├── TestImage
+|    
+|    ├── KonIQ-10k
+|    |    ├── 512x384
+|    |    ├── splits
+|    |    koniq10k_scores_and_distributions.csv
 ```
 
 </details>
@@ -218,6 +229,9 @@ Before training, you need to download the pristine images belonging to the KADIS
 |    ├── FLIVE
 |        
 |    ├── SPAQ
+|        
+|    ├── KonIQ-10k
+
 ```
 
 To train our model from scratch, run the following command:

@@ -1,5 +1,5 @@
 # General settings
-experiment_name: "ARNIQA_PHAVM_PC_GAMER_20241128_screen"   # name of the experiment
+experiment_name: ""   # name of the experiment
 device: 0   # -1 for CPU, otherwise GPU id
 seed: 27  # random seed
 data_base_path: "datasets/"    # path to the base directory containing the datasets
@@ -7,10 +7,10 @@ data_base_path: "datasets/"    # path to the base directory containing the datas
 
 # Training
 training:
-  epochs: 1    # number of epochs
+  epochs: 10    # number of epochs
   lr: !!float 1e-3    # learning rate
-  batch_size: 4     # batch size
-  num_workers: 4   # number of workers for data loading
+  batch_size: 16     # batch size
+  num_workers: 20   # number of workers for data loading
   log_images_frequency: 1000  # log input images every n batches
   resume_training: false    # resume training and logging of the experiment with the same name
 
@@ -49,11 +49,11 @@ validation:
       min_dist: 0.2   # min_dist for UMAP
       metric: euclidean   # metric for UMAP
   datasets:  # datasets to use for validation
-#    - live
-#    - csiq
-#    - tid2013
-#    - kadid10k
-#    - flive
+    - live
+    - csiq
+    - tid2013
+    - kadid10k
+    - flive
     - spaq
     - koniq10k
 
@@ -67,11 +67,11 @@ test:
   alpha: 0.1  # alpha value for the regression when grid search is not used
   crop_size: 224  # crop size for inference
   datasets:  # datasets to use for test
-#    - live
-#    - csiq
-#    - tid2013
-#    - kadid10k
-#    - flive
+    - live
+    - csiq
+    - tid2013
+    - kadid10k
+    - flive
     - spaq
     - koniq10k
 
@@ -87,8 +87,8 @@ model:
 
 # Logging
 logging:
-  use_wandb: false   # if True, use wandb for logging
+  use_wandb: true   # if True, use wandb for logging
   wandb:
-    online: false    # if True, log online to wandb
-    project: "ARNIQA_TEST"   # wandb project name
-    entity: "phavm-ufpe"    # wandb entity name (team name, not user)
+    online: true    # if True, log online to wandb
+    project: ""   # wandb project name
+    entity: ""    # wandb entity name (team name, not user)

@@ -52,9 +52,8 @@ def main(directory: str) -> None:
 
     for regressor_dataset in regressors_datasets_list:
         # Load the model
-        # model = torch.hub.load(repo_or_dir="miccunifi/ARNIQA", source="github", model="ARNIQA",
-        #                        regressor_dataset=regressor_dataset)
-        model = ARNIQA(regressor_dataset).to(device)
+        model = torch.hub.load(repo_or_dir="miccunifi/ARNIQA", source="github", model="ARNIQA",
+                                regressor_dataset=regressor_dataset)
         model.eval().to(device)
 
         # Define the normalization transform
@@ -97,7 +96,7 @@ def main(directory: str) -> None:
 
     # Save the DataFrame in a csv file
     df.to_csv(f"image_quality_scores_{directory}_with_crop_complete_KONIQ_PRETRAINED.csv", index=False)
-    print(f"Resultados salvos em 'image_quality_scores_{directory}_with_crop_KONIQ.csv'.")
+    print(f"Results saved in 'image_quality_scores_{directory}_with_crop_KONIQ.csv'.")
 
 
 if __name__ == "__main__":

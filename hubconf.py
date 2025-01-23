@@ -52,17 +52,9 @@ class ARNIQA(nn.Module):
         self.encoder = ResNet(embedding_dim=128, pretrained=True, use_norm=True)
         self.encoder.load_state_dict(torch.hub.load_state_dict_from_url(f"{base_url}/ARNIQA.pth", progress=True,
                                                                       map_location="cpu"))
-        #self.encoder.load_state_dict(torch.load("experiments/ARNIQA_PHAVM_PC_GAMER_20241128_screen/pretrain/ARNIQA.pth", map_location="cpu"))
-
-        # weights = torch.load("experiments/ARNIQA_PHAVM_PC_GAMER_20241128_screen/pretrain/best_epoch_2_srocc_0.899_plcc_0.909.pth", map_location="cpu")
-        # state_dict = {k.replace("encoder.", ""): v for k, v in weights.items()}
-        # self.encoder.load_state_dict(state_dict)
-
         self.encoder.eval()
-
-        self.regressor: nn.Module = torch.load("experiments/ARNIQA_PHAVM_PC_GAMER_20241128_screen/regressors/regressor_koniq10k.pth", map_location="cpu")
-        # self.regressor: nn.Module = torch.load(
-        #     "experiments/ARNIQA_PHAVM_PC_GAMER_20241128_screen/regressors/new_regressor_koniq10k.pth", map_location="cpu")
+        self.regressor: nn.Module = torch.hub.load_state_dict_from_url(f"{base_url}/regressor_{regressor_dataset}.pth",
+                                                                        progress=True, map_location="cpu")
         self.regressor.eval()
 
     def forward(self, img, img_ds, return_embedding: bool = False, scale_score: bool = True):
