@@ -6,19 +6,23 @@ import pandas as pd
 from hubconf import ARNIQA
 
 def main(directory: str) -> None:
-    iqa_score_dict = {"image_name": [], "regressor_dataset": [], "score": []}
+    iqa_score_dict = {"folder": [], "image_name": [], "regressor_dataset": [], "score": []}
 
     # Preparing the images list
     dir_path = os.path.join("assets", directory)
     images_list = []
-    for image_name in os.listdir(dir_path):
-        image_path = os.path.join(dir_path, image_name)
-        if image_name.endswith(".jpg") or image_name.endswith(".png"):
-            images_list.append(image_path)
+    for root, dirs, files in os.walk(dir_path):
+        for file in files:
+            if file.endswith(".jpg") or file.endswith(".jpeg"):
+                images_list.append(os.path.join(root, file))
+    # for image_name in os.listdir(dir_path):
+    #     image_path = os.path.join(dir_path, image_name)
+    #     if image_name.endswith(".jpg") or image_name.endswith(".png"):
+    #         images_list.append(image_path)
 
     # Set the device
     device = torch.device("cuda") if torch.cuda.is_available() else "cpu"
-    regressors_datasets_list = ["koniq10k"]
+    regressors_datasets_list = ["koniq10k", "live", "csiq", "flive", "spaq", "kadid10k", "tid2013", "clive"]
 
     for regressor_dataset in regressors_datasets_list:
         # Load the model
@@ -48,6 +52,7 @@ def main(directory: str) -> None:
             with torch.no_grad(), torch.cuda.amp.autocast():
                 score = model(img, img_ds, return_embedding=False, scale_score=True)
 
+            iqa_score_dict["folder"].append(image_path)
             iqa_score_dict["image_name"].append(img_name)
             iqa_score_dict["regressor_dataset"].append(regressor_dataset)
             iqa_score_dict["score"].append(score.item())
@@ -58,9 +63,9 @@ def main(directory: str) -> None:
     df = pd.DataFrame(iqa_score_dict)
 
     # Save the DataFrame in a csv file
-    df.to_csv(f"image_quality_scores_paper_semcrop_hriq.csv", index=False)
-    print(f"Results saved in 'image_quality_scores_PRETRAINED_KONIQ_sem_crop.csv'.")
+    df.to_csv(f"experiment_arniqa_all_models.csv", index=False)
+    print(f"Results saved in 'experiment_arniqa.csv'.")
 
 
 if __name__ == "__main__":
-    main('HRIQ_HQ')
+    main('experiment')

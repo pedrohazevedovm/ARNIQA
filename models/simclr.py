@@ -3,6 +3,7 @@ import torch.nn
 from dotmap import DotMap
 
 from models.resnet import ResNet
+from models.convnext import ConvNeXt
 
 
 class SimCLR(torch.nn.Module):
@@ -28,7 +29,7 @@ class SimCLR(torch.nn.Module):
     def __init__(self, encoder_params: DotMap, temperature: float = 0.1):
         super().__init__()
 
-        self.encoder = ResNet(embedding_dim=encoder_params.embedding_dim,
+        self.encoder = ConvNeXt(embedding_dim=encoder_params.embedding_dim,
                               pretrained=encoder_params.pretrained,
                               use_norm=encoder_params.use_norm)
 

@@ -1,16 +1,16 @@
 # General settings
-experiment_name: ""   # name of the experiment
+experiment_name: "convnext-test"   # name of the experiment
 device: 0   # -1 for CPU, otherwise GPU id
 seed: 27  # random seed
-data_base_path: "datasets/"    # path to the base directory containing the datasets
+data_base_path: "\\\\192.168.155.240/Robotica/dataset_iqa/"    # path to the base directory containing the datasets
 
 
 # Training
 training:
-  epochs: 10    # number of epochs
+  epochs: 1   # number of epochs
   lr: !!float 1e-3    # learning rate
-  batch_size: 16     # batch size
-  num_workers: 20   # number of workers for data loading
+  batch_size: 4    # batch size
+  num_workers: 4   # number of workers for data loading
   log_images_frequency: 1000  # log input images every n batches
   resume_training: false    # resume training and logging of the experiment with the same name
 
@@ -37,7 +37,7 @@ validation:
   frequency: 1    # validate every frequency epochs
   num_splits: 10   # number of splits to consider for each dataset
   alpha: 0.1  # alpha value for the regression
-  visualize: true   # visualize embeddings with t-SNE for KADID10K dataset
+  visualize: false   # visualize embeddings with t-SNE for KADID10K dataset
   visualization:
     tsne:
       n_components: 3   # number of components for t-SNE
@@ -50,30 +50,30 @@ validation:
       metric: euclidean   # metric for UMAP
   datasets:  # datasets to use for validation
     - live
-    - csiq
-    - tid2013
-    - kadid10k
-    - flive
-    - spaq
-    - koniq10k
+#    - csiq
+#    - tid2013
+#    - kadid10k
+#    - flive
+#    - spaq
+#    - koniq10k
 
 
 # Test
 test:
   batch_size: 16    # batch size
-  num_workers: 16   # number of workers for data loading ORIGINAL 20
+  num_workers: 0   # number of workers for data loading ORIGINAL 20
   num_splits: 10   # number of splits to consider for each dataset
   grid_search: true   # if True, grid search on the validation splits is used to find the best alpha value for the regression
   alpha: 0.1  # alpha value for the regression when grid search is not used
   crop_size: 224  # crop size for inference
   datasets:  # datasets to use for test
     - live
-    - csiq
-    - tid2013
-    - kadid10k
-    - flive
-    - spaq
-    - koniq10k
+#    - csiq
+#    - tid2013
+#    - kadid10k
+#    - flive
+#    - spaq
+#    - koniq10k
 
 
 # Model
@@ -87,8 +87,8 @@ model:
 
 # Logging
 logging:
-  use_wandb: true   # if True, use wandb for logging
+  use_wandb: false   # if True, use wandb for logging
   wandb:
-    online: true    # if True, log online to wandb
+    online: false    # if True, log online to wandb
     project: ""   # wandb project name
     entity: ""    # wandb entity name (team name, not user)

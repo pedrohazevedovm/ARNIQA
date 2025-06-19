@@ -6,6 +6,7 @@ import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="torch.serialization")
 
 from models.resnet import ResNet
+from models.convnext import ConvNeXt
 
 dependencies = ["torch"]
 
@@ -49,7 +50,7 @@ class ARNIQA(nn.Module):
         super(ARNIQA, self).__init__()
         assert regressor_dataset in available_datasets, f"parameter training_dataset must be in {available_datasets}"
         self.regressor_dataset = regressor_dataset
-        self.encoder = ResNet(embedding_dim=128, pretrained=True, use_norm=True)
+        self.encoder = ConvNeXt(embedding_dim=128, pretrained=True, use_norm=True)
         self.encoder.load_state_dict(torch.hub.load_state_dict_from_url(f"{base_url}/ARNIQA.pth", progress=True,
                                                                       map_location="cpu"))
         self.encoder.eval()
