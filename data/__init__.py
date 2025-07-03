@@ -6,3 +6,5 @@ from data.dataset_kadid10k import KADID10KDataset
 from data.dataset_flive import FLIVEDataset
 from data.dataset_spaq import SPAQDataset
 from data.dataset_koniq10k import Koniq10kDataset
+from data.dataset_hriq import HRIQDataset
+from data.dataset_uhd_iqa import UHDIQADataset

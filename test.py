@@ -17,7 +17,8 @@ from sklearn.linear_model import Ridge
 from scipy import stats
 import argparse
 
-from data import LIVEDataset, CSIQDataset, TID2013Dataset, KADID10KDataset, FLIVEDataset, SPAQDataset, Koniq10kDataset
+from data import LIVEDataset, CSIQDataset, TID2013Dataset, KADID10KDataset, FLIVEDataset, SPAQDataset, Koniq10kDataset, \
+    HRIQDataset, UHDIQADataset
 from utils.utils import PROJECT_ROOT, parse_command_line_args, merge_configs, parse_config
 from models.simclr import SimCLR
 
@@ -236,6 +237,14 @@ def get_results(model: nn.Module,
             dataset = Koniq10kDataset(data_base_path / "KonIQ-10k", phase="all", crop_size=crop_size)
             dataset_num_splits = num_splits
             dataset_name = "KONIQ10K"
+        elif d == "hriq":
+            dataset = HRIQDataset(data_base_path / "HRIQ", phase="all", crop_size=crop_size)
+            dataset_num_splits = num_splits
+            dataset_name = "HRIQ"
+        elif d == "uhdiqa":
+            dataset = UHDIQADataset(data_base_path / "UHD-IQA", phase="all", crop_size=crop_size)
+            dataset_num_splits = num_splits
+            dataset_name = "UHD-IQA"
         else:
             raise ValueError(f"Dataset {d} not supported")
 
