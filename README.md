@@ -1,9 +1,10 @@
 # ARNIQA-ConvNeXt: Deep Learning Project
 
-ARNIQA forked repository: Repository forked from the original ARNIQA repository containing modifications for training 
-ARNIQA change ResNet-50 for ConvNeXt tiny architeture.
+ARNIQA forked repository: Repository forked from the original ARNIQA repository containing ARNIQA changes to choose 
+ResNet-50 or ConvNeXt tiny architeture as encoder.
 
-Added KonIQ-10k, HRIQ and UHD-IQA datasets classes and splits to the training ARNIQA.
+Also added KonIQ-10k, HRIQ and UHD-IQA datasets classes and splits to train, validate and test ARNIQA with these 
+datasets.
 
 # ARNIQA (WACV 2024 Oral)
 
