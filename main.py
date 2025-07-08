@@ -51,7 +51,8 @@ def main():
                                   shuffle=True, pin_memory=True, drop_last=True)
 
     # Initialize the model
-    model = SimCLR(encoder_params=args.model.encoder, temperature=args.model.temperature)
+    model = SimCLR(encoder_params=args.model.encoder, temperature=args.model.temperature,
+                   architeture=args.model.architeture)
     model = model.to(device)
 
     # Initialize the optimizer

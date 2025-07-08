@@ -8,6 +8,7 @@ from torchvision import transforms
 from data.dataset_base_iqa import IQADataset
 from utils.utils_data import resize_crop, center_corners_crop
 
+
 class UHDIQADataset(IQADataset):
     """
     UHD-IQA dataset
@@ -23,12 +24,12 @@ class UHDIQADataset(IQADataset):
         super().__init__(root, mos_type=mos_type, mos_range=mos_range, is_synthetic=is_synthetic, phase=phase,
                          split_idx=split_idx, crop_size=crop_size)
         scores_csv = pd.read_csv(self.root / "uhd-iqa-metadata.csv")
-        scores_csv = scores_csv[["image_name", "Quality_mos"]]
+        scores_csv = scores_csv[["image_name", "quality_mos"]]
 
         self.images = scores_csv["image_name"].values.tolist()
         self.images = np.array([self.root / "database" / el for el in self.images])
 
-        self.mos = np.array(scores_csv["Quality_mos"].values.tolist())
+        self.mos = np.array(scores_csv["quality_mos"].values.tolist())
         self.split_idx = 0
 
         if self.phase != 'all':
@@ -67,4 +68,4 @@ class UHDIQADataset(IQADataset):
         return {"img": img, "img_ds": img_ds, "mos": mos}
 
     def get_split_indices(self, split: int, phase: str):
-        return self.splits[phase]
+        return self.splits[phase][0]

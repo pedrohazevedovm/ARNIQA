@@ -26,12 +26,17 @@ class SimCLR(torch.nn.Module):
 
     """
 
-    def __init__(self, encoder_params: DotMap, temperature: float = 0.1):
+    def __init__(self, encoder_params: DotMap, temperature: float = 0.1, architeture: str = 'resnet50'):
         super().__init__()
 
-        self.encoder = ConvNeXt(embedding_dim=encoder_params.embedding_dim,
-                              pretrained=encoder_params.pretrained,
-                              use_norm=encoder_params.use_norm)
+        if architeture == 'convnext':
+            self.encoder = ConvNeXt(embedding_dim=encoder_params.embedding_dim,
+                                    pretrained=encoder_params.pretrained,
+                                    use_norm=encoder_params.use_norm)
+        else:
+            self.encoder = ResNet(embedding_dim=encoder_params.embedding_dim,
+                                  pretrained=encoder_params.pretrained,
+                                  use_norm=encoder_params.use_norm)
 
         self.temperature = temperature
         self.criterion = nt_xent_loss

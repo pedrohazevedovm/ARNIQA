@@ -89,6 +89,7 @@ model:
     embedding_dim: 128    # embedding dimension
     pretrained: true    # if True, use ImageNet pretrained weights
     use_norm: true    # if True, normalize the embeddings
+  architeture: resnet  # model architeture
 
 
 # Logging

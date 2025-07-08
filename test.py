@@ -24,7 +24,7 @@ from models.simclr import SimCLR
 
 
 synthetic_datasets = ["live", "csiq", "tid2013", "kadid10k"]
-authentic_datasets = ["flive", "spaq", "koniq10k"]
+authentic_datasets = ["flive", "spaq", "koniq10k", "uhd-iqa", "hriq"]
 
 
 def test(args: DotMap,
@@ -476,7 +476,8 @@ if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     if args.eval_type == "scratch":
-        model = SimCLR(encoder_params=args.model.encoder, temperature=args.model.temperature)
+        model = SimCLR(encoder_params=args.model.encoder, temperature=args.model.temperature,
+                       architeture=args.model.architeture)
         checkpoint_base_path = PROJECT_ROOT / "experiments"
         assert (checkpoint_base_path / args.experiment_name).exists(), \
             f"Experiment {(checkpoint_base_path / args.experiment_name)} does not exist"
