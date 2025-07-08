@@ -1,7 +1,9 @@
-# Image Quality Assessment Using Deep Learning for Robotic Camera Shooting Evaluation
+# ARNIQA-ConvNeXt: Deep Learning Project
 
 ARNIQA forked repository: Repository forked from the original ARNIQA repository containing modifications for training 
-ARNIQA model using KonIQ-10k dataset as the training dataset for Pedro Mendonça's monograph from RRIA.
+ARNIQA change ResNet-50 for ConvNeXt tiny architeture.
+
+Added KonIQ-10k, HRIQ and UHD-IQA datasets classes and splits to the training ARNIQA.
 
 # ARNIQA (WACV 2024 Oral)
 
